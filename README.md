@@ -3,6 +3,8 @@
 
 * Instale o Vagrant e o VirtualBox(AMD64): https://www.vagrantup.com/downloads.html, https://www.virtualbox.org/wiki/Linux_Downloads
 
+* Instale o vim: ```sudo ./vim.sh```
+
 * Clone o repositorio: ```https://github.com/MES20171CodeSchool/VirtualMachine.git``` e entre dentro dele
 
 * Subir a máquina
@@ -17,14 +19,7 @@
     vagrant ssh
     ```
 
-* Ao entrar na máquina, execute os seguintes comandos para criar o ambiente virtual:
-
-    ```sh
-    echo "VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.bashrc
-    echo "source `which virtualenvwrapper.sh`" >> ~/.bashrc
-    source ~/.bashrc
-    mkvirtualenv codeschool --python=/usr/bin/python3.6
-    ```
+* Crie o ambiente virtual: ```mkvirtualenv django --python=/usr/bin/python3.6```
 
 * Entre dentro do ambiente virtual: ```workon codeschool```
 

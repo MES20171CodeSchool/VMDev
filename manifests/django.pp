@@ -3,7 +3,6 @@ exec {"apt-update":
 }
 
 package {[
-  "vim",
   "python3-dev",
   "python3-pip",
   "git-core",
@@ -35,6 +34,25 @@ exec {"install-vm":
   require => Exec['python-script']
 }
 
+file {".bashrc":
+  source => "/vagrant/manifests/.bashrc",
+  path => '/home/vagrant/.bashrc',
+  ensure => 'file',
+  owner => 'root',
+  group => 'root',
+  mode  => '0777',
+  require => Exec['install-vm']
+}
+
+file {".bash_git":
+  source => "/vagrant/manifests/.bash_git",
+  path => '/home/vagrant/.bash_git',
+  ensure => 'file',
+  owner => 'root',
+  group => 'root',
+  mode  => '0777',
+}
+
 file {"README":
   source => "/vagrant/README.md",
   path => '/home/vagrant/README.md',
@@ -50,38 +68,26 @@ exec {"codeschool-repo":
   require => Package['git-core']
 }
 
-file {"vim-repo":
-  source => "/vagrant/manifests/.vim",
-  path => '/home/vagrant/.vim',
-  ensure => 'directory',
-  recurse => remote,
-  replace => true,
-  owner => 'root',
-  group => 'root',
-  mode  => '0777',
-  require => Package['git-core']
-}
-
-exec {"vundle-vim":
-  command => 'git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim',
-  path => "/usr/bin",
-  require => File['vim-repo']
-}
-
-file {".bashrc":
-  source => "/vagrant/manifests/.bashrc",
-  path => '/home/vagrant/.bashrc',
+file {"vim":
+  source => "/vagrant/manifests/vim.sh",
+  path => '/home/vagrant/vim.sh',
   ensure => 'file',
   owner => 'root',
   group => 'root',
-  mode  => '0777',
+  mode  => '0744',
 }
 
-file {".bash_git":
-  source => "/vagrant/manifests/.bash_git",
-  path => '/home/vagrant/.bash_git',
+file {"atom":
+  source => "/vagrant/manifests/atom.sh",
+  path => '/usr/local/bin/atom.sh',
   ensure => 'file',
   owner => 'root',
   group => 'root',
-  mode  => '0777',
+  mode  => '0744',
+  notify => Exec['atom-script'],
+}
+
+exec {"atom-script":
+  command => '/usr/local/bin/atom.sh',
+  timeout => 0,
 }

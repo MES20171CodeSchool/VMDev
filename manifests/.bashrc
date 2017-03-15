@@ -65,3 +65,5 @@ else
   PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\W$(__git_ps1 "(%s)")$ '
 fi
 
+VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
