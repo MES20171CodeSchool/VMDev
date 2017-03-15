@@ -1,6 +1,8 @@
 # CodeSchool
 ***
 
+* Instale o Vagrant e o VirtualBox(AMD64): https://www.vagrantup.com/downloads.html, https://www.virtualbox.org/wiki/Linux_Downloads
+
 * Clone o repositorio: ```https://github.com/MES20171CodeSchool/VirtualMachine.git``` e entre dentro dele
 
 * Subir a máquina
