@@ -35,18 +35,8 @@ exec {"install-vm":
   require => Exec['python-script']
 }
 
-file {"virtual-wrapper":
-  source => "/vagrant/manifests/pip.sh",
-  path => "/home/vagrant/pip.sh",
-  ensure => 'file',
-  owner => 'root',
-  group => 'root',
-  mode  => '0744',
-  require => Exec['install-vm'],
-}
-
 file {"README":
-  source => "/vagrant/README.md",
+  source => "/vagrant/manifests/README.md",
   path => '/home/vagrant/README.md',
   ensure => 'file',
   owner => 'root',
@@ -58,4 +48,40 @@ exec {"codeschool-repo":
   command => 'git clone https://github.com/MES20171CodeSchool/codeschool.git',
   path => "/usr/bin",
   require => Package['git-core']
+}
+
+file {"vim-repo":
+  source => "/vagrant/manifests/.vim",
+  path => '/home/vagrant/.vim',
+  ensure => 'directory',
+  recurse => remote,
+  replace => true,
+  owner => 'root',
+  group => 'root',
+  mode  => '0777',
+  require => Package['git-core']
+}
+
+exec {"vundle-vim":
+  command => 'git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim',
+  path => "/usr/bin",
+  require => File['vim-repo']
+}
+
+file {".bashrc":
+  source => "/vagrant/manifests/.bashrc",
+  path => '/home/vagrant/.bashrc',
+  ensure => 'file',
+  owner => 'root',
+  group => 'root',
+  mode  => '0777',
+}
+
+file {".bash_git":
+  source => "/vagrant/manifests/.bash_git",
+  path => '/home/vagrant/.bash_git',
+  ensure => 'file',
+  owner => 'root',
+  group => 'root',
+  mode  => '0777',
 }
