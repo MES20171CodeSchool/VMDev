@@ -36,7 +36,7 @@ exec {"install-vm":
 }
 
 file {"README":
-  source => "/vagrant/manifests/README.md",
+  source => "/vagrant/README.md",
   path => '/home/vagrant/README.md',
   ensure => 'file',
   owner => 'root',
