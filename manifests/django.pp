@@ -63,7 +63,7 @@ file {"README":
 }
 
 exec {"codeschool-repo":
-  command => 'git clone https://github.com/MES20171CodeSchool/codeschool.git',
+  command => 'git clone https://github.com/MES20171CodeSchool/cs-server.git',
   path => "/usr/bin",
   require => Package['git-core']
 }
